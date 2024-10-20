@@ -23,7 +23,7 @@ class Car :
     def __str__(self) :
         return "color = %s, speed = %d" % (self.color, self.speed)
 
-    def display(self) :
+    def display(self) : # self를 사용함은. 나중에 display함수를 사용하기 위해서 파생 클래스를 생성하고 함수를 사용할테니까... 그 파생 클래스의 변수들의 내용을 수정하게끔 한다.
         print(self.color, ":", self.speed)
 
 
