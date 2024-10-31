@@ -1,14 +1,14 @@
 # 힙에 (빈도수, 문자) 튜플을 추가하여 허프만 트리를 구성하도록 수정합니다.
-def heappush(heap, node):
-    heap.append(node)
+def heappush(heap, n):
+    heap.append(n)
     i = len(heap) - 1
     while i != 1:
         pi = i // 2
-        if node[0] >= heap[pi][0]:  # 빈도수를 기준으로 최소 힙 구성
+        if n[0] >= heap[pi][0]:  # 빈도수를 기준으로 최소 힙 구성
             break
         heap[i] = heap[pi]
         i = pi
-    heap[i] = node
+    heap[i] = n
 
 def heappop(heap):
     size = len(heap) - 1
@@ -46,12 +46,12 @@ def build_huffman_tree(chars, freqs):
     return heappop(heap)
 
 # 허프만 코드 생성 (재귀적으로 트리 순회)
-def generate_codes(node, prefix="", code_map={}):
-    if isinstance(node[1], str):  # 리프 노드
-        code_map[node[1]] = prefix
+def generate_codes(n, prefix="", code_map={}):
+    if isinstance(n[1], str):  # 리프 노드
+        code_map[n[1]] = prefix
     else:
-        generate_codes(node[1][0], prefix + "0", code_map)
-        generate_codes(node[1][1], prefix + "1", code_map)
+        generate_codes(n[1][0], prefix + "0", code_map)
+        generate_codes(n[1][1], prefix + "1", code_map)
     return code_map
 
 # 압축률 계산 함수
