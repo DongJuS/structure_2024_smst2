@@ -44,16 +44,43 @@ def build_huffman_tree(chars, freqs):
         heappush(heap, merged)
 
     return heappop(heap)
+''' easy version
+# 허프만 트리 생성 함수
+def build_huffman_tree(chars, freqs):
+    heap = [Node(char, freq) for char, freq in zip(chars, freqs)]
+    heapq.heapify(heap)  # 최소 힙 구조로 변환
 
+    while len(heap) > 1:
+        left = heapq.heappop(heap)   # 빈도수가 가장 작은 두 노드 꺼내기
+        right = heapq.heappop(heap)
+        merged = Node(None, left.freq + right.freq)  # 새 노드 생성
+        merged.left = left
+        merged.right = right
+        heapq.heappush(heap, merged)  # 새 노드를 힙에 추가
+
+    return heap[0]  # 루트 노드를 반환
+    '''
 # 허프만 코드 생성 (재귀적으로 트리 순회)
 def generate_codes(n, prefix="", code_map={}):
     if isinstance(n[1], str):  # 리프 노드
         code_map[n[1]] = prefix
     else:
-        generate_codes(n[1][0], prefix + "0", code_map)
-        generate_codes(n[1][1], prefix + "1", code_map)
+        generate_codes(n[1][0], prefix + "1", code_map)
+        generate_codes(n[1][1], prefix + "0", code_map)
     return code_map
+''' easy version
+def generate_codes(node, prefix="", code_map=None):
+    if code_map is None:
+        code_map = {}
 
+    if node.char:  # 리프 노드라면
+        code_map[node.char] = prefix
+    else:
+        generate_codes(node.left, prefix + "0", code_map)
+        generate_codes(node.right, prefix + "1", code_map)
+
+    return code_map
+    '''
 # 압축률 계산 함수
 def calculate_compression_rate(chars, freqs, code_map):
     original_size = sum([freq * 8 for freq in freqs])  # ASCII 코드 기준
