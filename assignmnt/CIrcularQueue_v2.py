@@ -25,15 +25,17 @@ class CircularQueue:
         if not self.isEmpty():
             return self.array[(self.front + 1) % self.capacity]
 
-    def size(self):
-        return (self.rear - self.front + self.capacity) % self.capacity
+    # 코드 5.2: 큐의 전체 요소의 수 계산
+    def size( self ) :
+       return (self.rear - self.front + self.capacity) % self.capacity
 
+    # 코드 5.3: 문자열 변환을 위한 str 연산자 중복
     def __str__(self):
-        if self.front < self.rear:
+        if self.front < self.rear :
             return str(self.array[self.front+1:self.rear+1])
-        else:
+        else :
             return str(self.array[self.front+1:self.capacity] + \
-                       self.array[0:self.rear+1])
+                       self.array[0:self.rear+1] )
 
 # 테스트 프로그램
 if __name__ == "__main__":
