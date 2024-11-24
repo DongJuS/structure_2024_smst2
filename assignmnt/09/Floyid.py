@@ -11,11 +11,11 @@ def printA(A):
                 print("%4d " % A[i][j], end='')
         print("")
 
-# [수정됨] Floyd-Warshall 알고리즘에서 최단 경로 테이블 추가 및 갱신
+# Floyd-Warshall 알고리즘에서 최단 경로 테이블 추가 및 갱신
 def shortest_path_floyd(vertex, adj):
     vsize = len(vertex)
     A = list(adj)
-    # [수정됨] 각 경로의 이전 vertex를 추적하는 path 테이블 초기화
+    # 각 경로의 이전 vertex를 추적하는 path 테이블 초기화
     path = [[-1 if i == j or adj[i][j] == INF else i for j in range(vsize)] for i in range(vsize)]
 
     for i in range(vsize):
@@ -31,7 +31,7 @@ def shortest_path_floyd(vertex, adj):
 
     return A, path
 
-# [수정됨] 최단 경로를 재구성하기 위한 함수 추가
+# 최단 경로를 재구성하기 위한 함수 추가
 def get_path(path, start, end, vertex):
     if path[start][end] == -1:
         return None
@@ -53,10 +53,10 @@ weight = [[0, 7, INF, INF, 3, 10, INF],
 
 print("Shortest Path Calculation")
 
-# [수정됨] 모든 최단 거리와 경로 테이블 계산
+# 모든 최단 거리와 경로 테이블 계산
 distance, path = shortest_path_floyd(vertex, weight)
 
-# [수정됨] 사용자 입력으로 시작 및 종료 vertex 받기
+# 사용자 입력으로 시작 및 종료 vertex 받기
 start_vertex = input("Start Vertex: ").strip().upper()
 end_vertex = input("End Vertex: ").strip().upper()
 
@@ -64,7 +64,7 @@ if start_vertex in vertex and end_vertex in vertex:
     start_idx = vertex.index(start_vertex)
     end_idx = vertex.index(end_vertex)
 
-    # [수정됨] 최단 경로와 거리 출력
+    # 최단 경로와 거리 출력
     shortest_path = get_path(path, start_idx, end_idx, vertex)
     distance_value = distance[start_idx][end_idx]
 
