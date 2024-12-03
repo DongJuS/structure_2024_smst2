@@ -21,7 +21,7 @@ def sortGapInsertion(A, first, last, gap) :
     while gap > 0 :
         if (gap % 2) == 0 : gap += 1	# gap이 짝수이면 1을 더함 
         for i in range(gap) :
-            sortGapInsertion(A, i, n - 1, gap);
+            sortGapInsertion(A, i, n - 1, gap)
         print('     Gap=', gap, A)
         gap = gap//2
         #printStep(A, count)		    # 중간 과정 출력용 문장 
